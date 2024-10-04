@@ -23,9 +23,10 @@ async def send_welcome(message):
 # Handle all other messages with content_type 'text' (content_types defaults to ['text'])
 @bot.message_handler(func=lambda message: True)
 async def echo_message(message):
-    await bot.reply_to(message, message.text)
+    #await bot.reply_to(message, 'chuj')
+    await bot.send_message(chat_id=903485794, text='aha xd')
 
-bot.se
+
 
 asyncio.run(bot.polling())
 
