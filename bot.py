@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 import os
 import asyncio
 import telebot
+from main import current_price
 
 load_dotenv()
 key = os.getenv('API_KEY')
@@ -16,16 +17,24 @@ bot = AsyncTeleBot(key)
 # Handle '/start' and '/help'
 @bot.message_handler(commands=['help', 'start'])
 async def send_welcome(message):
-    text = 'Hi, I am EchoBot.\nJust write me something and I will repeat it!'
+    text = 'Hello, I will tell you the price of your product!'
+    await bot.reply_to(message, text)
+    
+    
+@bot.message_handler(func=lambda message: 'kiedy Damian sie oswiadczy?')
+async def hihi(message):
+    text = 'Aha czyli ty to pewnie Livia tak? Nie powiem ci.'
     await bot.reply_to(message, text)
 
 
 # Handle all other messages with content_type 'text' (content_types defaults to ['text'])
 @bot.message_handler(func=lambda message: True)
 async def echo_message(message):
-    #await bot.reply_to(message, 'chuj')
-    await bot.send_message(chat_id=903485794, text='aha xd')
+    await bot.reply_to(message, str(f'{current_price} zł'))
 
+
+# async def notify_about_the_price(price):
+#     await bot.send_message(chat_id=903485794, text=str(f'{current_price} zł'))
 
 
 asyncio.run(bot.polling())

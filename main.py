@@ -23,8 +23,10 @@ chrome_options.add_argument("--no-sandbox")
 chrome_options.add_argument("--disable-gpu")
 service = Service(PATH)
 
+current_price = 0
+
 i = 1
-while True:
+while i<2:
     driver = webdriver.Chrome(service = service, options=chrome_options)
     
     driver.get(samsung_monitor_morele_url)
@@ -36,6 +38,7 @@ while True:
     driver.quit()
 
     price = product_prices[0].text.strip()
+    current_price = price
     formatted_price = float(price.replace('zł', '').replace(' ', '').replace(',', '.'))
     t = datetime.now()
     formatted_time = t.strftime("%d/%m/%Y %H:%M:%S")
@@ -50,28 +53,3 @@ while True:
     
     time.sleep(10)
     i += 1
-        
-
-"""# Tworzenie pustego wykresu
-x, y = [], []
-plt.ion()  # Tryb interaktywny
-
-fig, ax = plt.subplots()
-line, = ax.plot(x, y)
-
-# Aktualizacja danych w czasie rzeczywistym
-for i in range(100):
-    x.append(i)
-    y.append(np.sin(i / 10.0))
-    
-    line.set_xdata(x)
-    line.set_ydata(y)
-    ax.relim()  # Przeliczenie granic
-    ax.autoscale_view()
-    
-    #plt.draw()
-    plt.pause(0.1)  # Pauza, aby można było zobaczyć aktualizacje
-    time.sleep(0.1)
-
-plt.ioff()  # Wyłączanie trybu interaktywnego
-plt.show()"""
