@@ -21,9 +21,9 @@ async def send_welcome(message):
     await bot.reply_to(message, text)
     
     
-@bot.message_handler(func=lambda message: 'kiedy Damian sie oswiadczy?')
+@bot.message_handler(commands=['hej'])
 async def hihi(message):
-    text = 'Aha czyli ty to pewnie Livia tak? Nie powiem ci.'
+    text = 'Hej Liv'
     await bot.reply_to(message, text)
 
 
