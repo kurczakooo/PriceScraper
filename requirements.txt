@@ -7,6 +7,6 @@ seaborn
 beautifulsoup4
 datetime
 telegram
-dotenv
+python-dotenv
 pyTelegramBotAPI
 aiohttp
