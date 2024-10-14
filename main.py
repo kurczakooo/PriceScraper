@@ -15,14 +15,17 @@ price_df = pd.DataFrame(columns=['price', 'time'])
 
 PATH  = './chromedriver-win64/chromedriver.exe'
 
-PATH_LINUX = './chromedriver-linux64/chromedriver'
+#PATH_LINUX = '/usr/bin/google-chrome'
+PATH_LINUX = './chromedriver-linux64/chromedriver.exe'
 
 samsung_monitor_morele_url = 'https://www.morele.net/monitor-samsung-viewfinity-s50gc-ls34c500gauxen-12767113/?utm_source=google&utm_medium=cpc&utm_campaign=20541966716&gad_source=1&gclid=Cj0KCQjwurS3BhCGARIsADdUH52flXIPpOT1haDmjaqYwsxML8CLmVd_urm1PDxjgiPR1H1GmQytKT0aAnkDEALw_wcB'
 
 chrome_options = Options()
 chrome_options.add_argument("--headless")  # Tryb bezokienkowy
+#chrome_options.add_argument("--no-sandbox")  # Disable sandbox for headless mode
+#chrome_options.add_argument("--disable-dev-shm-usage")  # Overcome limited resource problems
 
-service = Service(PATH)
+service = Service(PATH_LINUX)
 
 current_price = 0
 
