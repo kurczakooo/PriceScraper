@@ -15,6 +15,8 @@ price_df = pd.DataFrame(columns=['price', 'time'])
 
 PATH  = './chromedriver-win64/chromedriver.exe'
 
+PATH_LINUX = './chromedriver-linux64/chromedriver'
+
 samsung_monitor_morele_url = 'https://www.morele.net/monitor-samsung-viewfinity-s50gc-ls34c500gauxen-12767113/?utm_source=google&utm_medium=cpc&utm_campaign=20541966716&gad_source=1&gclid=Cj0KCQjwurS3BhCGARIsADdUH52flXIPpOT1haDmjaqYwsxML8CLmVd_urm1PDxjgiPR1H1GmQytKT0aAnkDEALw_wcB'
 
 chrome_options = Options()
