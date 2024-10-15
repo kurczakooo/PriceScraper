@@ -13,7 +13,7 @@ from datetime import datetime
 #import seaborn as sns
 from bs4 import BeautifulSoup
 from urls import samsung_odyssey_g5_allegro_url
-from allegro_through_ceneo.captcha_allegro import do_captcha
+from ceneo.scrape_price import scrape_ceneo_price
 
 price_df = pd.DataFrame(columns=['price', 'time'])
 
@@ -30,35 +30,13 @@ chrome_options = Options()
 
 service = Service(PATH)
 
-current_price = 0
-price = ""
-
 driver = webdriver.Chrome(service = service, options=chrome_options)
 
 driver.get(samsung_odyssey_g5_allegro_url)
 
-# time.sleep(100)
+prices = scrape_ceneo_price(driver=driver)
 
-try:
-    WebDriverWait(driver, 50).until(
-        EC.presence_of_element_located((By.CLASS_NAME, 'cookie-consent__buttons__action js_cookie-consent-agree primary'))    
-    )
-    button = driver.find_element(By.CLASS_NAME, 'cookie-consent__buttons__action js_cookie-consent-agree primary')
-    button.click()
-    
-    WebDriverWait(driver, 50).until(
-        EC.presence_of_element_located((By.CLASS_NAME, 'price'))    
-    )
-    html = driver.page_source
-    soup = BeautifulSoup(html, 'html.parser')
-    product_prices = soup.find_all('div', class_='price')
-    print(product_prices)
-    #price = product_prices[0].text.strip()
-     
-except Exception as e:
-    print(f'Error: {e}')
-finally:
-    driver.quit()
+print(prices[0])
 
 # current_price = price
 # formatted_price = float(price.replace('zł', '').replace(' ', '').replace(',', '.'))
