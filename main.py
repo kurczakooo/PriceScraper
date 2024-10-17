@@ -34,23 +34,25 @@ driver = webdriver.Chrome(service = service, options=chrome_options)
 
 driver.get(samsung_odyssey_g5_allegro_url)
 
-#prices = scrape_ceneo_price(driver=driver)
+prices = scrape_ceneo_price(driver=driver)
 
 
 
-df = pd.read_csv("price_history.csv")
-print(df.info())
+df = pd.read_csv("samsung_g5_price_history.csv", header=0, index_col=0)
+df['data'] = pd.to_datetime(df['data'])
 
 
 
-# current_price = prices[0]
-# t = datetime.now()
-# formatted_time = t.strftime("%d/%m/%Y %H:%M:%S")
 
-# print(f'cena: {current_price}, data: {formatted_time}')
+current_price = prices[0]
+formatted_time = pd.to_datetime(datetime.now())
 
-# with open('price_history.csv', 'a', encoding='utf-8') as file:
-#     file.write(f'{2},{current_price},{formatted_time}\n')
-#     file.close()
+print(f'cena: {current_price}, data: {formatted_time}')
+
+df.loc[len(df)] = [current_price, formatted_time]
+
+print(df.dtypes)
     
-# print('dodano wiersz do historii')
+    
+df.to_csv('samsung_g5_price_history.csv')    
+print('\ndodano wiersz do historii')
