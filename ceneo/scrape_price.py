@@ -17,17 +17,18 @@ def scrape_ceneo_price(driver) -> list:
         html = driver.page_source
         soup = BeautifulSoup(html, 'html.parser')
         product_prices = soup.find_all('span', class_='price')
+
+    except Exception as e:
+        print(f'Scraping Error: {e}')
+    finally:
+        driver.quit()
         
         for price in product_prices:
             value = price.find('span', class_='value').text
             penny = price.find('span', class_='penny').text
             full_price = float((value+penny).replace(',', '.').replace(' ', ''))
             prices.append(full_price)
-
-    except Exception as e:
-        print(f'Scraping Error: {e}')
-    finally:
-        driver.quit()
+        
         return prices
   
   
