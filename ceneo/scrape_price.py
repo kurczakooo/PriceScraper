@@ -11,7 +11,6 @@ def scrape_ceneo_price(driver) -> list:
     
     try:
         #decline_ceneo_cookies(driver)
-        
         WebDriverWait(driver, 5).until(
             EC.presence_of_element_located((By.CLASS_NAME, 'product-offer__product__price'))    
         )
