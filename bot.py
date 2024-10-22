@@ -11,9 +11,9 @@ key = os.getenv('API_KEY')
 
 bot = Bot(key)
 
-async def notify_about_the_price(price):
+async def notify_about_the_price(message):
     try:
-        await bot.send_message(chat_id=903485794, text=f'{price} zł')
+        await bot.send_message(chat_id=903485794, text=message)
         print("Message sent successfully.")
     except TelegramError as e:
         print(f"Failed to send message: {e}")
